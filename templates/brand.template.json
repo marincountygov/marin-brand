@@ -5,7 +5,7 @@
   "status": "draft",
   "brand": {
     "name": "Replace with the brand's real name, e.g. \"Marin County Parks\"",
-    "documentTitle": "Optional — defaults to '<name> brand guide' if omitted",
+    "website": "Optional — https://… link shown as Website: under the description",
     "lastUpdated": "Optional free-text date, e.g. September 30, 2026 — omit to hide the 'Updated ...' line",
     "sourceUrl": "Optional — use instead of sourceFile when this brand's canonical guide is a live webpage, not an archived PDF. See brands/fixitmarin/brand.json."
   },

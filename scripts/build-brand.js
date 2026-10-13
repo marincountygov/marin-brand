@@ -72,21 +72,28 @@ function buildBrand(slug) {
               </div>`;
   }
 
-  function downloadButton(id, name, preview) {
-    if (!preview) return "";
-    const ext = (preview.split(".").pop() || "").toUpperCase();
+  // `downloads` is optional: a list of { file, label? } for assets offered in
+  // more than one format (e.g. SVG + PNG). Without it, the preview file is
+  // the single download, as before.
+  function downloadButton(id, name, preview, downloads) {
+    const files = downloads && downloads.length
+      ? downloads.map((d) => ({ href: d.file, label: d.label || (d.file.split(".").pop() || "").toUpperCase() }))
+      : preview
+        ? [{ href: preview, label: (preview.split(".").pop() || "").toUpperCase() }]
+        : [];
+    if (!files.length) return "";
     const panelId = `download-${id}-panel`;
     return `
               <div class="menu logo-card__download">
                 <button type="button" class="doc-action menu-toggle" aria-expanded="false" aria-controls="${esc(panelId)}">Download<svg class="menu-toggle__caret" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></button>
                 <div id="${esc(panelId)}" class="menu-panel" hidden>
-                  <a href="${esc(preview)}" download aria-label="Download ${esc(name)} as ${esc(ext)}">${esc(ext)}</a>
+                  ${files.map((f) => `<a href="${esc(f.href)}" download aria-label="Download ${esc(name)} as ${esc(f.label)}">${esc(f.label)}</a>`).join("\n                  ")}
                 </div>
               </div>`;
   }
 
   function logoCard(variant) {
-    const reversed = /reversed/.test(variant.id);
+    const reversed = variant.previewBackground === "dark" || /reversed/.test(variant.id);
     return `
             <article class="logo-card">
               ${variant.preview ? `<div class="logo-card__preview${reversed ? " logo-card__preview--reversed" : ""}">
@@ -97,7 +104,7 @@ function buildBrand(slug) {
               ${variant.usage ? `<p>${esc(variant.usage)}</p>` : ""}${logoCardMeta([
       { label: "Minimum width", value: variant.minimumWidthInches ? `${esc(variant.minimumWidthInches)}"` : "" },
     ])}
-              ${downloadButton(variant.id, variant.name, variant.preview)}
+              ${downloadButton(variant.id, variant.name, variant.preview, variant.downloads)}
             </article>`;
   }
 
@@ -346,8 +353,9 @@ function buildBrand(slug) {
     <main id="main" class="page" tabindex="-1">
       <div class="docs-layout">
         <article class="content">
-          <h1 class="doc-title">${esc(data.brand.documentTitle || `${data.brand.name} brand guide`)}</h1>
+          <h1 class="doc-title">${esc(data.brand.name)}</h1>
           <p class="doc-description">${esc(data.purpose.summary)}</p>
+          ${data.brand.website ? `<p class="doc-website">Website: <a href="${esc(data.brand.website)}">${esc(data.brand.website.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</a></p>` : ""}
           ${data.brand.lastUpdated ? `<p class="doc-updated">Updated ${esc(data.brand.lastUpdated)}</p>` : ""}
           <div class="doc-actions">
             <div class="menu">
