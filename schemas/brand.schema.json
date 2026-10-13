@@ -19,7 +19,7 @@
       "properties": {
         "name": { "type": "string", "description": "Rendered in the page title, breadcrumb, and directory card." },
         "shortName": { "type": "string" },
-        "documentTitle": { "type": "string", "description": "Falls back to '<name> brand guide' if omitted." },
+        "website": { "type": "string", "description": "Optional. The brand's own website, shown as 'Website: <link>' under the description. Omit to hide the line." },
         "lastUpdated": { "type": "string", "description": "Free-text date shown under the title, e.g. 'September 30, 2026'. Omit to hide that line." },
         "sourceUpdated": { "type": "string", "description": "Only meaningful when this brand was extracted from a dated source document." },
         "preparedBy": { "type": "string" },
@@ -69,6 +69,19 @@
               "usage": { "type": "string" },
               "minimumWidthInches": { "type": "number" },
               "preview": { "type": "string", "description": "Path relative to this brand's own folder, e.g. assets/reference-previews/primary-logo-reference.png." },
+              "previewBackground": { "type": "string", "enum": ["dark"], "description": "Set to 'dark' to show the preview on a dark card (for white or reversed artwork). Variants whose id contains 'reversed' get a dark card automatically." },
+              "downloads": {
+                "type": "array",
+                "description": "Optional. Files offered in the Download menu, e.g. SVG and PNG. Without it, the preview file is the only download.",
+                "items": {
+                  "type": "object",
+                  "required": ["file"],
+                  "properties": {
+                    "file": { "type": "string", "description": "Path relative to this brand's own folder." },
+                    "label": { "type": "string", "description": "Menu label. Defaults to the file extension in capitals." }
+                  }
+                }
+              },
               "source": { "$ref": "#/$defs/citation" }
             }
           }
