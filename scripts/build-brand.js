@@ -82,10 +82,17 @@ function buildBrand(slug) {
         ? [{ href: preview, label: (preview.split(".").pop() || "").toUpperCase() }]
         : [];
     if (!files.length) return "";
+    if (files.length === 1) {
+      const only = files[0];
+      return `
+              <div class="logo-card__download">
+                <a class="action-button" href="${esc(only.href)}" download data-icon="download" aria-label="Download ${esc(name)} as ${esc(only.label)}" title="Download ${esc(only.label)}"></a>
+              </div>`;
+    }
     const panelId = `download-${id}-panel`;
     return `
               <div class="menu logo-card__download">
-                <button type="button" class="doc-action menu-toggle" aria-expanded="false" aria-controls="${esc(panelId)}">Download<svg class="menu-toggle__caret" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></button>
+                <button type="button" class="action-button menu-toggle" data-icon="download" aria-expanded="false" aria-controls="${esc(panelId)}" aria-label="Download ${esc(name)}, choose a format" title="Download"><svg class="menu-toggle__caret" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></button>
                 <div id="${esc(panelId)}" class="menu-panel" hidden>
                   ${files.map((f) => `<a href="${esc(f.href)}" download aria-label="Download ${esc(name)} as ${esc(f.label)}">${esc(f.label)}</a>`).join("\n                  ")}
                 </div>
@@ -358,9 +365,8 @@ function buildBrand(slug) {
           ${data.brand.website ? `<p class="doc-website">Website: <a href="${esc(data.brand.website)}">${esc(data.brand.website.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</a></p>` : ""}
           ${data.brand.lastUpdated ? `<p class="doc-updated">Updated ${esc(data.brand.lastUpdated)}</p>` : ""}
           <div class="doc-actions">
-            <div class="menu">
-              <button type="button" class="doc-action menu-toggle" aria-expanded="false" aria-controls="share-menu-panel">Share<svg class="menu-toggle__caret" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></button>
-              <div id="share-menu-panel" class="menu-panel" hidden><button type="button" data-action="share">Copy link</button></div>
+            <div class="action-group" role="group" aria-label="Page actions">
+              <button type="button" class="action-button" data-action="share" data-icon="share" aria-label="Share: copy the link to this page" title="Copy link"></button>
             </div>
             <span class="doc-action-status" role="status" aria-live="polite"></span>
           </div>
