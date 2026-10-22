@@ -16,7 +16,7 @@ Each brand lives in its own `brands/<slug>/` folder. `brands/<slug>/brand.json` 
 
 ## Before finishing
 
-There is no automated check command yet. Manually verify: `node scripts/validate-brand.js` passes, `node scripts/build-all.js` runs clean and is idempotent (no diff on a second run with no data changes), and against the review checklist in `marin-skills/marin-app-builder/SKILL.md`: metadata placeholders replaced, nav includes About and Updates, accessibility basics, no invented components.
+Run `bash scripts/check.sh` (shell integrity, the button audit, `node scripts/validate-brand.js`, and `tests/test_generated.py`, which fails when a generated page is out of date, a referenced file is missing, or a color is not printed as text) and `bash scripts/check.sh --browser` (adds `tests/browser_brand.py`, which needs Playwright for Python with Chromium). Also manually verify: `node scripts/validate-brand.js` passes, `node scripts/build-all.js` runs clean and is idempotent (no diff on a second run with no data changes), and against the review checklist in `marin-skills/marin-app-builder/SKILL.md`: metadata placeholders replaced, nav includes About and Updates, accessibility basics, no invented components.
 
 ## References
 
