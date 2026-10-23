@@ -57,7 +57,7 @@ class GeneratedBrandTests(unittest.TestCase):
             shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns(".git", "node_modules", "__pycache__"))
             result = node("scripts/build-all.js", cwd=copy)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-            pages = [Path("index.html")] + [p.relative_to(ROOT) for p in (ROOT / "brands").glob("*/index.html")]
+            pages = [Path("index.html"), Path("brands.json")] + [p.relative_to(ROOT) for p in (ROOT / "brands").glob("*/index.html")]
             stale = [str(p) for p in pages if (ROOT / p).read_text(encoding="utf-8") != (copy / p).read_text(encoding="utf-8")]
             self.assertEqual(stale, [], f"These pages differ from what the generators produce; run node scripts/build-all.js: {stale}")
 
@@ -70,6 +70,19 @@ class GeneratedBrandTests(unittest.TestCase):
             node("scripts/build-all.js", cwd=copy)
             second = {str(p.relative_to(copy)): p.read_bytes() for p in copy.glob("brands/*/index.html")}
             self.assertEqual(first, second, "A second run changes the pages")
+
+    def test_brand_list_names_each_brand_with_a_qr_code_logo(self):
+        listed = json.loads((ROOT / "brands.json").read_text(encoding="utf-8"))["brands"]
+        expected = []
+        for folder in BRANDS:
+            data = json.loads((folder / "brand.json").read_text(encoding="utf-8"))
+            if data.get("qrCodeLogos", {}).get("items"):
+                expected.append(folder.name)
+        self.assertEqual(sorted(item["slug"] for item in listed), sorted(expected))
+        names = [item["name"] for item in listed]
+        self.assertEqual(names, sorted(names), "The list is in A to Z order")
+        for item in listed:
+            self.assertTrue((ROOT / item["qrCodeLogo"]).is_file(), f"{item['slug']}: logo file is missing")
 
     def test_referenced_files_exist(self):
         for folder in BRANDS:
