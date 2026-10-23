@@ -46,7 +46,6 @@ function main() {
           ? `<img class="brand-card__preview" src="brands/${esc(slug)}/${esc(preview)}" alt="" loading="lazy">`
           : "") +
         `<h3><a href="brands/${esc(slug)}/">${esc(data.brand.name)}</a></h3>` +
-        `<p>${esc(data.purpose.summary)}</p>` +
         `</article>`
       );
     })
