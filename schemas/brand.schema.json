@@ -204,6 +204,28 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "qrCodeLogos": {
+      "type": "object",
+      "description": "Optional. Shown under Logos. Logos made for the center of a QR code, such as in Marin Links. A square PNG works best. Mark one item as the default.",
+      "properties": {
+        "guidance": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "preview"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "default": { "type": "boolean", "description": "True for the logo a tool should use unless told otherwise." },
+              "description": { "type": "string" },
+              "usage": { "type": "string" },
+              "preview": { "type": "string", "description": "Path to a square PNG under this brand's assets/ folder." }
+            }
+          }
+        }
+      }
+    },
     "illustrations": {
       "type": "object",
       "description": "Optional. Supporting scene/concept illustrations distinct from logos — for a brand whose materials include outreach graphics beyond the mark itself.",

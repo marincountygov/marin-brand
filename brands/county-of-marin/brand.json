@@ -189,6 +189,19 @@
       }
     }
   },
+  "qrCodeLogos": {
+    "guidance": "The default is the square gold patch. Use it for the center of a QR code made in Marin Links.",
+    "items": [
+      {
+        "id": "square-default",
+        "name": "QR code logo",
+        "default": true,
+        "description": "Square gold patch with the Civic Center symbol and County of Marin name.",
+        "usage": "Use as the logo in the center of a QR code for the County of Marin. The gold keeps the dark code easy to see.",
+        "preview": "assets/qr-code-logos/square.png"
+      }
+    ]
+  },
   "colors": {
     "guidance": {
       "primaryPalette": "Black and gold. Black is used for line art and typography; gold derives from the Civic Center spire and is used in special cases.",

@@ -115,6 +115,30 @@ function buildBrand(slug) {
             </article>`;
   }
 
+  // --- QR code logos ---------------------------------------------------------
+  // Optional: square logos made for the center of a QR code (used by Marin Links). Shown under Logos.
+
+  function qrLogoCard(item) {
+    return `
+            <article class="logo-card">
+              <div class="logo-card__preview logo-card__preview--square">
+                <img src="${esc(item.preview)}" alt="${esc(item.name)} preview" loading="lazy">
+              </div>
+              <h3>${esc(item.name)}</h3>
+              ${item.description ? `<p>${esc(item.description)}</p>` : ""}
+              ${item.usage ? `<p>${esc(item.usage)}</p>` : ""}
+              ${downloadButton(item.id, item.name, item.preview)}
+            </article>`;
+  }
+
+  // A sub-part of the Logos section, like the optional logo graphic.
+  const qrCodeLogos = data.qrCodeLogos
+    ? `<h3 id="qr-code-logos">QR code logos</h3>
+          ${data.qrCodeLogos.guidance ? `<p>${esc(data.qrCodeLogos.guidance)}</p>` : ""}
+          <div class="logo-grid">${(data.qrCodeLogos.items || []).map(qrLogoCard).join("")}
+          </div>`
+    : "";
+
   // graphicMark is optional — a brand with only wordmark/lockup logos (no
   // separate icon-only mark) skips this sub-part entirely.
   const graphicMark = data.logos.graphicMark;
@@ -137,6 +161,7 @@ function buildBrand(slug) {
               ${downloadButton("logo-graphic", graphicMark.name, graphicMark.preview)}
             </article>
           </div>` : ""}
+          ${qrCodeLogos}
         </section>`;
 
   // --- Illustrations ---------------------------------------------------------
