@@ -84,6 +84,19 @@
       }
     ]
   },
+  "qrCodeLogos": {
+    "guidance": "The default is the square FixItMarin wordmark. Use it for the center of a QR code made in Marin Links.",
+    "items": [
+      {
+        "id": "square-default",
+        "name": "QR code logo",
+        "default": true,
+        "description": "FixItMarin wordmark on a white square.",
+        "usage": "Use as the logo in the center of a QR code for FixItMarin.",
+        "preview": "assets/qr-code-logos/square.png"
+      }
+    ]
+  },
   "colors": {
     "guidance": {
       "primaryPalette": "Black for the primary wordmark, with a blue accent on \"It\" to distinguish the FixItMarin name.",

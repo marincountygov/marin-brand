@@ -25,6 +25,7 @@ Each brand owns one `brands/<slug>/` folder: its `brand.json` (the source of tru
 1. `mkdir brands/<slug>` (a short, URL-safe id, e.g. `parks`).
 2. Copy [`templates/brand.template.json`](templates/brand.template.json) to `brands/<slug>/brand.json` and fill it in — see [`brands/county-of-marin/brand.json`](brands/county-of-marin/brand.json) for a fully filled-out example, and [`schemas/brand.schema.json`](schemas/brand.schema.json) for what's actually required versus optional. Citation/source-document fields are optional — only fill them in if this brand really was extracted from an existing PDF guide.
 3. Add the logo/preview image files the `brand.json` references under `brands/<slug>/assets/`.
+   - Optional: add a `qrCodeLogos` block with a square PNG (for example `assets/qr-code-logos/square.png`) to show a "QR code logos" part under Logos. Mark the main one `"default": true`.
 4. `node scripts/validate-brand.js` — catches a malformed `brand.json` before it renders.
 5. `node scripts/build-all.js` — generates `brands/<slug>/index.html` and adds the new brand's card to this repo's own landing page.
 

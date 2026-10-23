@@ -67,6 +67,19 @@
   "publicationNotes": [
     "Anything a reader should know about this guide's status, gaps, or what's still pending approval."
   ],
+  "qrCodeLogos": {
+    "guidance": "Logos made for the center of a QR code. A square PNG works best.",
+    "items": [
+      {
+        "id": "square-default",
+        "name": "Square logo",
+        "default": true,
+        "description": "What the logo looks like.",
+        "usage": "When to use it.",
+        "preview": "assets/qr-code-logos/square.png"
+      }
+    ]
+  },
   "illustrations": {
     "$comment": "Optional — delete this whole block if this brand has no supporting scene/concept graphics beyond the logo itself. See brands/fixitmarin/brand.json.",
     "guidance": "When/how these illustrations should be used.",
