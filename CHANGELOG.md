@@ -4,6 +4,7 @@ Tracks changes to this repo's own content and tooling — the `brands/` data, th
 
 ## Unreleased
 
+- Write `brands.json` at the repo root when the generators run. It lists each brand that has a QR code logo, in A to Z order, so Marin Links can offer new brands without a hand-kept list.
 - Add an optional `qrCodeLogos` attribute to `brand.json` (schema, template, and generator), which renders a "QR code logos" part under Logos. Each brand has a default square PNG at `assets/qr-code-logos/square.png`, for use as the center logo in Marin Links.
 - Extract the Brand Center out of `marin-docs/brand/` into this standalone, multi-brand repo, instantiated from `marin-app-template` 1.2.1.
 - Generalize `marin-docs/scripts/build-brand-center.js` into `scripts/build-brand.js` (one brand) and `scripts/build-all.js` (every brand, plus this repo's own "Brands" directory card grid).

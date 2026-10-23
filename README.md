@@ -15,6 +15,7 @@ Static, zero-build-step, same as every MarinOS app — except for the generators
 ```
 brands/<slug>/brand.json   →  scripts/build-brand.js <slug>  →  brands/<slug>/index.html
 brands/*/brand.json        →  scripts/build-all.js           →  every brand's index.html
+                                                                  + brands.json (the list Marin Links reads)
                                                                   + the "Brands" directory in this repo's own index.html
 ```
 
