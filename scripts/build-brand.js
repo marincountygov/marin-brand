@@ -391,7 +391,7 @@ function buildBrand(slug) {
           ${data.brand.lastUpdated ? `<p class="doc-updated">Updated ${esc(data.brand.lastUpdated)}</p>` : ""}
           <div class="doc-actions">
             <div class="action-group" role="group" aria-label="Page actions">
-              <button type="button" class="action-button" data-action="share" data-icon="share" aria-label="Share: copy the link to this page" title="Copy link"></button>
+              <button type="button" class="action-button" data-action="share" data-icon="link" aria-label="Copy link" title="Copy link"></button>
             </div>
             <span class="doc-action-status" role="status" aria-live="polite"></span>
           </div>
