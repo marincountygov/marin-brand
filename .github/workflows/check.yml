@@ -14,6 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          path: marin-brand
+      # marin-data.lock names the marin-data commit this repo last synced. It is checked out next to this repo,
+      # so scripts/check.sh can compare the copies. With no lock file, those checks are skipped.
+      - name: Read marin-data.lock
+        id: lock
+        run: |
+          if [ -f marin-brand/marin-data.lock ]; then echo "sha=$(tr -d '[:space:]' < marin-brand/marin-data.lock)" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v7
+        if: steps.lock.outputs.sha != ''
+        with:
+          repository: marincountygov/marin-data
+          ref: ${{ steps.lock.outputs.sha }}
+          path: marin-data
       - uses: actions/setup-node@v7
         with:
           node-version: "20"
@@ -21,3 +35,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: bash scripts/check.sh
+        working-directory: marin-brand
