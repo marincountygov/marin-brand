@@ -19,7 +19,7 @@ brands/*/brand.json        →  scripts/build-all.js           →  every brand'
                                                                   + the "Brands" directory in this repo's own index.html
 ```
 
-Each brand owns one `brands/<slug>/` folder: its `brand.json` (the source of truth), the generated `index.html` (never hand-edited — it doesn't edit itself), its own `assets/`, and `source-documents/` if it was extracted from an existing print style guide.
+Each brand owns one `brands/<slug>/` folder: its `brand.json` (the source of truth), the generated `index.html` (never hand-edited — it doesn't edit itself), its own `assets/`, and no stored PDFs: a source guide is linked by `sourceUrl` if it has a public URL, and otherwise not linked (see `marin-data/sources.json`).
 
 ## Adding a brand
 
