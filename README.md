@@ -19,16 +19,22 @@ brands/*/brand.json        →  scripts/build-all.js           →  every brand'
                                                                   + the "Brands" directory in this repo's own index.html
 ```
 
-Each brand owns one `brands/<slug>/` folder: its `brand.json` (the source of truth), the generated `index.html` (never hand-edited — it doesn't edit itself), its own `assets/`, and no stored PDFs: a source guide is linked by `sourceUrl` if it has a public URL, and otherwise not linked (see `marin-data/sources.json`).
+Each brand has one `brands/<slug>/` folder: its `brand.json` and `assets/` (copies of the data in `marin-data`), the generated `index.html` (never hand-edited — it doesn't edit itself), and no stored PDFs: a source guide is linked by `sourceUrl` if it has a public URL, and otherwise not linked (see `marin-data/sources.json`).
+
+## Where brand data is edited
+
+The brand data is edited in `marin-data`: each brand's `brand/<slug>/brand.json` and its `assets/`. The `brands/<slug>/brand.json` and `assets/` here are copies, so the Download buttons and the addresses other apps use stay the same. A daily Data sync copies any change here, rebuilds the pages, runs the checks, and pushes a `data-sync` branch for review. Never edit a copy.
+
+By hand: `python3 scripts/sync-brand.py`, then `node scripts/validate-brand.js` and `node scripts/build-all.js`. `marin-data.lock` records the `marin-data` version this repo uses. After a sync, run `bash ../marin-data/scripts/lock.sh .` to update it.
 
 ## Adding a brand
 
-1. `mkdir brands/<slug>` (a short, URL-safe id, e.g. `parks`).
-2. Copy [`templates/brand.template.json`](templates/brand.template.json) to `brands/<slug>/brand.json` and fill it in — see [`brands/county-of-marin/brand.json`](brands/county-of-marin/brand.json) for a fully filled-out example, and [`schemas/brand.schema.json`](schemas/brand.schema.json) for what's actually required versus optional. Citation/source-document fields are optional — only fill them in if this brand really was extracted from an existing PDF guide.
-3. Add the logo/preview image files the `brand.json` references under `brands/<slug>/assets/`.
+1. In `marin-data`, make `brand/<slug>/` (a short, URL-safe id, e.g. `parks`).
+2. Copy `templates/brand.template.json` (in `marin-data`) to `brand/<slug>/brand.json` and fill it in. See `brands/county-of-marin/brand.json` here for a fully filled-out example, and [`schemas/brand.schema.json`](schemas/brand.schema.json) for what is required versus optional. Source-guide fields are optional: fill them in only if this brand really has a public source guide.
+3. Add the logo and preview image files the `brand.json` names under `brand/<slug>/assets/`.
    - Optional: add a `qrCodeLogos` block with a square PNG (for example `assets/qr-code-logos/square.png`) to show a "QR code logos" part under Logos. Mark the main one `"default": true`.
-4. `node scripts/validate-brand.js` — catches a malformed `brand.json` before it renders.
-5. `node scripts/build-all.js` — generates `brands/<slug>/index.html` and adds the new brand's card to this repo's own landing page.
+4. In `marin-data`, run `python3 check_brand.py`. It checks that every file `brand.json` names exists and that none is left out. Merge it.
+5. Here, the daily Data sync picks it up. Or run `python3 scripts/sync-brand.py`, `node scripts/validate-brand.js` and `node scripts/build-all.js`. That generates `brands/<slug>/index.html` and adds the new brand's card to this repo's own landing page.
 
 ## Relationship to `marin-digital-standards/brand/`
 

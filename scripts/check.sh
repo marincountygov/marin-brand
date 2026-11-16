@@ -21,6 +21,8 @@ if [[ -f "$SHELL_DIR/scripts/install.py" ]]; then
 else
   printf 'SKIP: marin-app-shell is not next to this repo; shell integrity was not checked.\n' >&2
 fi
+# Brand data is edited in marin-data; brands/ here must match it. Skipped when marin-data is not next to this repo.
+python3 "$ROOT_DIR/scripts/sync-brand.py" --check
 # The audit ships with the shell release; use the installed copy so it matches the installed shell.
 if [[ -f "$ROOT_DIR/vendor/marinos/audit-buttons.py" ]]; then
   python3 "$ROOT_DIR/vendor/marinos/audit-buttons.py" "$ROOT_DIR" --fail
