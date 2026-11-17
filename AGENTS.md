@@ -8,7 +8,7 @@ Each brand lives in its own `brands/<slug>/` folder. The brand data is edited in
 
 ## Before making changes
 
-1. Editing a brand's content means editing its `brand.json` or assets in `marin-data`, then here running `python3 scripts/sync-brand.py` and `node scripts/build-all.js` (the daily Data sync does this and pushes a `data-sync` branch). Never edit a copy or a `brands/<slug>/index.html` directly, they will be overwritten. `marin-data.lock` records which `marin-data` version this repo uses; `bash ../marin-data/scripts/lock.sh .` updates it.
+1. Editing a brand's content means editing its `brand.json` or assets in `marin-data`, then here running `python3 scripts/sync-brand.py` and `node scripts/build-all.js` (the scheduled Data sync does this and pushes a `data-sync` branch). Never edit a copy or a `brands/<slug>/index.html` directly, they will be overwritten. `marin-data.lock` records which `marin-data` version this repo uses; `bash ../marin-data/scripts/lock.sh .` updates it.
 2. Validate before building: `node scripts/validate-brand.js` checks every `brands/*/brand.json` against `schemas/brand.schema.json`.
 3. Adding a new brand: see the README's "Adding a brand" section. The template is `templates/brand.template.json` in `marin-data`. `schemas/brand.schema.json` is deliberately permissive (no `additionalProperties: false`) so a new brand isn't forced into County of Marin's shape — citation/source-document fields, `identity`, and `typography.digitalImplementation` are all optional.
 4. If a change needs to touch `scripts/build-brand.js`'s generated HTML shape (not just `brand.json` content), keep it data-driven — the goal is that a future brand never needs a code change, only a new `brand.json`.
