@@ -25,7 +25,7 @@ Each brand has one `brands/<slug>/` folder: its `brand.json` and `assets/` (copi
 
 The brand data is edited in `marin-data`: each brand's `brand/<slug>/brand.json` and its `assets/`. The `brands/<slug>/brand.json` and `assets/` here are copies, so the Download buttons and the addresses other apps use stay the same. A scheduled Data sync copies any change here, rebuilds the pages, runs the checks, and pushes a `data-sync` branch for review. Never edit a copy.
 
-By hand: `python3 scripts/sync-brand.py`, then `node scripts/validate-brand.js` and `node scripts/build-all.js`. `marin-data.lock` records the `marin-data` version this repo uses. After a sync, run `bash ../marin-data/scripts/lock.sh .` to update it.
+By hand: `python3 ../marin-data/scripts/sync_copies.py .`, then `node scripts/validate-brand.js` and `node scripts/build-all.js`. `marin-data.lock` records the `marin-data` version this repo uses. After a sync, run `bash ../marin-data/scripts/lock.sh .` to update it.
 
 ## Adding a brand
 
@@ -34,7 +34,7 @@ By hand: `python3 scripts/sync-brand.py`, then `node scripts/validate-brand.js` 
 3. Add the logo and preview image files the `brand.json` names under `brand/<slug>/assets/`.
    - Optional: add a `qrCodeLogos` block with a square PNG (for example `assets/qr-code-logos/square.png`) to show a "QR code logos" part under Logos. Mark the main one `"default": true`.
 4. In `marin-data`, run `python3 check_brand.py`. It checks that every file `brand.json` names exists and that none is left out. Merge it.
-5. Here, the scheduled Data sync picks it up. Or run `python3 scripts/sync-brand.py`, `node scripts/validate-brand.js` and `node scripts/build-all.js`. That generates `brands/<slug>/index.html` and adds the new brand's card to this repo's own landing page.
+5. Here, the scheduled Data sync picks it up. Or run `python3 ../marin-data/scripts/sync_copies.py .`, `node scripts/validate-brand.js` and `node scripts/build-all.js`. That generates `brands/<slug>/index.html` and adds the new brand's card to this repo's own landing page.
 
 ## Relationship to `marin-digital-standards/brand/`
 
