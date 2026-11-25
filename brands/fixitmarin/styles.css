@@ -13,14 +13,11 @@
   margin: 1.25rem 0 0;
 }
 
-/* audit-cards: exempt (a brand's own logo card, drawn in that brand's showcase) */
+/* The logo card is the shared .app-card (surface, padding, shadow); this only lays out what is inside. */
 .logo-card {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  border: 1px solid var(--app-border);
-  border-radius: var(--pico-border-radius);
-  background: var(--app-surface);
+  margin-bottom: 0;
 }
 
 .logo-card__preview {

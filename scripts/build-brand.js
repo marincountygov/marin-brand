@@ -102,7 +102,7 @@ function buildBrand(slug) {
   function logoCard(variant) {
     const reversed = variant.previewBackground === "dark" || /reversed/.test(variant.id);
     return `
-            <article class="logo-card">
+            <article class="app-card logo-card">
               ${variant.preview ? `<div class="logo-card__preview${reversed ? " logo-card__preview--reversed" : ""}">
                 <img src="${esc(variant.preview)}" alt="${esc(variant.name)} preview" loading="lazy">
               </div>` : ""}
@@ -120,7 +120,7 @@ function buildBrand(slug) {
 
   function qrLogoCard(item) {
     return `
-            <article class="logo-card">
+            <article class="app-card logo-card">
               <div class="logo-card__preview logo-card__preview--square">
                 <img src="${esc(item.preview)}" alt="${esc(item.name)} preview" loading="lazy">
               </div>
@@ -153,7 +153,7 @@ function buildBrand(slug) {
           ${graphicMark ? `<h3>Logo graphic</h3>
           <p>${esc(graphicMark.description)} ${esc(graphicMark.colorRule)}</p>
           <div class="logo-grid">
-            <article class="logo-card">
+            <article class="app-card logo-card">
               <div class="logo-card__preview">
                 <img src="${esc(graphicMark.preview)}" alt="${esc(graphicMark.name)} preview" loading="lazy">
               </div>
@@ -169,7 +169,7 @@ function buildBrand(slug) {
 
   function illustrationCard(item) {
     return `
-            <article class="logo-card">
+            <article class="app-card logo-card">
               ${item.preview ? `<div class="logo-card__preview">
                 <img src="${esc(item.preview)}" alt="${esc(item.name)} preview" loading="lazy">
               </div>` : `<p class="app-help-text">Preview pending.</p>`}
@@ -222,7 +222,7 @@ function buildBrand(slug) {
 
   function socialAsset(asset) {
     return `
-            <article class="logo-card">
+            <article class="app-card logo-card">
               ${asset.preview ? `<div class="logo-card__preview">
                 <img src="${esc(asset.preview)}" alt="${esc(asset.name)} preview" loading="lazy">
               </div>` : ""}
