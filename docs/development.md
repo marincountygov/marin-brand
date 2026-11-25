@@ -15,7 +15,7 @@ Serve the folder with any static web server when browser origin behavior matters
 1. Replace every `APP_NAME`, `APP_DESCRIPTION`, and `APP_OWNER` placeholder — search the project for these tokens (`index.html`, `README.md`) and fill them in with real values.
 2. Update the page `<title>` and `<meta name="description">`.
 3. Replace the starter `#start` section in `index.html` with the real workflow. Keep the standard `#about`, `#security`, `#accessibility`, and `#updates` sections in `index.html`; the App Shell (`<marin-app-info>`) generates and routes them.
-4. Keep **About** and **Updates** in the application header navigation, with no default **Start** item. Keep the footer app name as plain text followed by **About**, **Security**, **Accessibility**, and **Updates**, with **MarinOS** on its own line.
+4. Keep About and Updates out of the application header (they are in the footer), with no default **Start** item. Keep the footer app name as plain text followed by **About**, **Security**, **Accessibility**, and **Updates**, with **MarinOS** on its own line.
 5. Add app-specific styles to `assets/app.css` and app-specific behavior to `assets/app.js` — see the guidance comments in each file before adding new patterns.
 
 ## Use the App Shell
